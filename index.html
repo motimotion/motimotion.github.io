@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MotiMotion: Motion-Controlled Video Generation with Visual Reasoning</title>
+  <meta name="description"
+    content="Project website for MotiMotion, a motion-controlled video generation framework with visual reasoning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="vendor/academicons/css/academicons.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9SYB9MTF7W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-9SYB9MTF7W');
+</script>
+
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">MotiMotion</div>
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#method">Method</a>
+          <a href="#benchmark">MotiBench</a>
+          <a href="#results">Results</a>
+          <a href="#comparison">Comparison</a>
+        </div>
+      </nav>
+
+      <section class="hero-content" id="overview">
+        <p class="eyebrow">ICML 2026</p>
+        <h1>
+          <span class="title-line">MotiMotion:</span>
+          <span class="title-line">Motion-Controlled</span>
+          <span class="title-line">Video Generation</span>
+          <span class="title-line">with Visual Reasoning</span>
+        </h1>
+        <p class="authors">
+          <a href="https://shinying.github.io/" target="_blank">Lee Hsin-Ying</a><sup>1 *</sup>&emsp;
+          <a href="https://hwjiang1510.github.io/" target="_blank">Hanwen Jiang</a><sup>2</sup>&emsp;
+          <a href="https://yiqunmei.net/" target="_blank">Yiqun Mei</a><sup>2</sup>&emsp;
+          <a href="https://jshi31.github.io/jingshi/" target="_blank">Jing Shi</a><sup>2</sup>&emsp;
+          <a href="https://faculty.ucmerced.edu/mhyang/" target="_blank">Ming-Hsuan Yang</a><sup>1</sup>&emsp;
+          <a href="https://zhixinshu.github.io/" target="_blank">Zhixin Shu</a><sup>2</sup>
+        </p>
+        <p class="affiliations"><sup>1</sup>University of California, Merced&emsp;&emsp;<sup>2</sup>Adobe Research</p>
+        <p class="footnote"><sup>*</sup>Work done as an intern at Adobe</p>
+
+        <div class="hero-actions">
+          <a class="button" href="https://arxiv.org/pdf/2605.22818" target="_blank">
+            <i class="button-icon fa-regular fa-file-lines" aria-hidden="true"></i>
+            <span>Paper</span>
+          </a>
+          <a class="button" href="https://arxiv.org/abs/2605.22818" target="_blank">
+            <i class="button-icon ai ai-arxiv" aria-hidden="true"></i>
+            <span>arXiv</span>
+          </a>
+          <a class="button" href="https://huggingface.co/datasets/shinying/motibench" target="_blank">
+            <i class="button-icon fa-solid fa-database" aria-hidden="true"></i>
+            <span>Data</span>
+          </a>
+          <a class="button" href="https://github.com/motimotion/motimotion" target="_blank">
+            <i class="button-icon fa-brands fa-github" aria-hidden="true"></i>
+            <span>GitHub</span>
+          </a>
+        </div>
+
+        <p class="lead">
+          MotiMotion reformulates motion control as a reasoning-then-generation problem.
+          It refines sparse user trajectories, predicts plausible secondary motion, and
+          uses confidence-aware control to balance faithfulness and realism.
+        </p>
+      </section>
+    </header>
+
+    <main>
+      <section class="section abstract-section">
+        <div class="section-header">
+          <p class="eyebrow">Abstract</p>
+          <h2>
+            <span class="section-title-line">Reasoning over intent, causality,</span>
+            <span class="section-title-line">and motion plausibility</span>
+          </h2>
+        </div>
+        <p class="abstract">
+          Current motion-controlled image-to-video models often treat user-provided
+          trajectories as literal commands, even when those inputs are sparse, imprecise,
+          or causally incomplete. MotiMotion introduces a visual-language reasoner that
+          refines primary motion, hallucinates plausible secondary effects, and guides a
+          confidence-aware video generator to produce more natural and physically grounded
+          outcomes.
+        </p>
+      </section>
+
+      <section class="section figure-section" id="method">
+        <div class="section-header">
+          <p class="eyebrow">Method</p>
+          <h2>
+            <span class="section-title-line">Prompt and motion reasoning</span>
+            <span class="section-title-line">before generation</span>
+          </h2>
+        </div>
+        <p class="abstract">
+          A training-free visual-language reasoner interprets the input image, trajectories,
+          and optional text prompt to refine primary motion and hallucinate plausible secondary
+          effects. These enriched plans guide a video generator to produce causally grounded videos.
+        </p>
+        <figure class="feature-figure">
+          <img src="assets/method.jpg" alt="Overview of the MotiMotion method" />
+          <figcaption>
+            MotiMotion uses a training-free visual-language reasoner to refine user intent,
+            infer missing motion, and improve controllability for complex interactions.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section method-conf-section" id="confidence">
+        <div class="section-header">
+          <p class="eyebrow">Method</p>
+          <h2>
+            <span class="section-title-line">Confidence-aware control that balances</span>
+            <span class="section-title-line">user intent and generative prior</span>
+          </h2>
+        </div>
+        <p class="abstract">
+          We assign a confidence score to each trajectory and modulate the motion conditioning strength accordingly.
+          High-confidence inputs are followed strictly; low-confidence inputs let the generative prior
+          fill in natural dynamics.
+        </p>
+        <div class="method-conf-grid">
+          <div class="method-conf-card hover-media" data-label="Training & inference">
+            <img src="assets/conf.jpg" alt="Confidence-aware training and inference" />
+          </div>
+          <div class="method-conf-card hover-media" data-label="Input">
+            <img src="assets/conf/input.jpg" alt="Input image with user trajectories" />
+          </div>
+          <div class="method-conf-card hover-media" data-label="High confidence">
+            <video src="assets/conf/high.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="method-conf-card hover-media" data-label="Low confidence">
+            <video src="assets/conf/low.mp4" autoplay loop muted playsinline></video>
+          </div>
+        </div>
+        <p class="conf-footnote">Images from <a href="https://wan-move.github.io/" , target="_blank">MoveBench</a> and
+          <a href="https://motion-edit.github.io/" , target="_blank">MotionEdit</a>.
+        </p>
+      </section>
+
+      <section class="section benchmark-section" id="benchmark">
+        <div class="section-headline">
+          <div class="section-header">
+            <p class="eyebrow">MotiBench</p>
+            <h2>
+              <span class="section-title-line">Interaction-centric benchmark scenes</span>
+              <span class="section-title-line">that motivate causal motion reasoning</span>
+            </h2>
+          </div>
+          <div class="pager-controls">
+            <button class="ghost-button pager-arrow" id="bench-prev" type="button"
+              aria-label="Previous benchmark page">&lt;</button>
+            <div class="pager-dots" id="bench-dots" aria-label="Benchmark pages"></div>
+            <button class="ghost-button pager-arrow" id="bench-next" type="button"
+              aria-label="Next benchmark page">&gt;</button>
+          </div>
+        </div>
+        <p class="section-note">
+          Each sample pairs an image with a prompt that requires plausible causal effects
+          and world-aware motion understanding.
+        </p>
+        <div class="bench-grid" id="bench-grid"></div>
+      </section>
+
+      <section class="section results-section" id="results">
+        <div class="section-headline">
+          <div class="section-header">
+            <p class="eyebrow">Results</p>
+            <h2>
+              <span class="section-title-line">Generated samples with refined motion</span>
+              <span class="section-title-line">and causal interaction reasoning</span>
+            </h2>
+          </div>
+          <div class="pager-controls">
+            <button class="ghost-button pager-arrow" id="results-prev" type="button"
+              aria-label="Previous results page">&lt;</button>
+            <div class="pager-dots" id="results-dots" aria-label="Results pages"></div>
+            <button class="ghost-button pager-arrow" id="results-next" type="button"
+              aria-label="Next results page">&gt;</button>
+          </div>
+        </div>
+        <p class="section-note">
+          Red lines indicate user trajectories. Blue lines indicate predicted trajectories.
+        </p>
+        <div class="gallery-grid" id="more-results-grid"></div>
+      </section>
+
+      <section class="section comparison-section" id="comparison">
+        <div class="section-headline">
+          <div class="section-header">
+            <p class="eyebrow">Comparison</p>
+            <h2>
+              <span class="section-title-line">Baselines and Ablations</span>
+            </h2>
+          </div>
+          <div class="pager-controls">
+            <button class="ghost-button pager-arrow" id="comparison-prev" type="button"
+              aria-label="Previous comparison sample">&lt;</button>
+            <div class="pager-dots" id="comparison-dots" aria-label="Comparison samples"></div>
+            <button class="ghost-button pager-arrow" id="comparison-next" type="button"
+              aria-label="Next comparison sample">&gt;</button>
+          </div>
+        </div>
+
+        <div class="comparison-context" id="comparison-context"></div>
+        <div class="comparison-grid" id="comparison-grid"></div>
+      </section>
+
+      <section class="section conf-section">
+        <div class="section-headline">
+          <div class="section-header">
+            <p class="eyebrow">Confidence-Aware Control</p>
+            <h2>
+              <span class="section-title-line">High-confidence inputs follow plans strictly,</span>
+              <span class="section-title-line">low-confidence inputs stay elastic</span>
+            </h2>
+          </div>
+          <div class="pager-controls">
+            <button class="ghost-button pager-arrow" id="conf-prev" type="button"
+              aria-label="Previous confidence sample">&lt;</button>
+            <div class="pager-dots" id="conf-dots" aria-label="Confidence samples"></div>
+            <button class="ghost-button pager-arrow" id="conf-next" type="button"
+              aria-label="Next confidence sample">&gt;</button>
+          </div>
+        </div>
+        <p class="section-note">
+          We set user trajectories (red lines) to high-confidence and show the difference between predicted trajectories
+          (blue lines) under high and low-confidence.
+        </p>
+        <div class="conf-grid" id="conf-grid"></div>
+      </section>
+
+      <section class="section bibtex-section" id="bibtex">
+        <div class="section-header">
+          <p class="eyebrow">Citation</p>
+          <h2>BibTeX</h2>
+        </div>
+        <pre class="bibtex-block"><code>@inproceedings{hsinying2026motimotion,
+  title={MotiMotion: Motion-Controlled Video Generation with Visual Reasoning},
+  author={Hsin-Ying, Lee and Jiang, Hanwen and Mei, Yiqun and Shi, Jing and Yang, Ming-Hsuan and Shu, Zhixin},
+  booktitle={Forty-third International Conference on Machine Learning},
+  year={2026},
+}</code></pre>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
